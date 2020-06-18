@@ -7,14 +7,17 @@ import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.transaction.Transactional;
 
 import com.tao.bean.Person;
+import com.tao.bean.Person;
+import com.tao.utl.Convert;
 
 @Stateless
 @LocalBean
 public class PersonServiceBean implements PersonService {
 	
-	@PersistenceContext(unitName="itcast") EntityManager em;
+	@PersistenceContext(unitName="weblogic-datasource") EntityManager em;
 
 	public PersonServiceBean() {
 		// TODO Auto-generated constructor stub
@@ -27,9 +30,25 @@ public class PersonServiceBean implements PersonService {
 	}
 
 	@Override
+	
 	public void update(Person person) {
 		// TODO Auto-generated method stub
-		em.merge(person);
+		//System.out.print("this is person  "+person);
+
+		
+	//	try {
+			Person person_db=getPerson(person.getId());
+			person_db.setAge(person.getAge());
+			person_db.setGender(person.getGender());
+			person_db.setHeight(person.getHeight());
+			person_db.setName(person.getName());
+			em.merge(person_db);
+	
+//		}catch(Exception e) {
+//			e.printStackTrace();
+//			System.out.println("this is a  problem person"+person);
+//			
+//		}
 	}
 
 	@Override
@@ -50,5 +69,8 @@ public class PersonServiceBean implements PersonService {
 		// TODO Auto-generated method stub
 		return em.createQuery("select o from Person o").getResultList();
 	}
+	
+
+	
 
 }

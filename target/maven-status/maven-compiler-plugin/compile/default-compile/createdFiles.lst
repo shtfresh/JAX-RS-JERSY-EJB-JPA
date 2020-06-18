@@ -1,0 +1,4 @@
+com\tao\rest\JvmTest.class
+com\tao\bean\Person.class
+com\tao\service\PersonService.class
+com\tao\service\PersonServiceBean.class

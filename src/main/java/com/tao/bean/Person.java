@@ -17,7 +17,7 @@ private String gender;
 private Integer age;
 private Integer height;
 
-@Id @Column(name="ID") @GeneratedValue(strategy=GenerationType.AUTO)
+@Id @Column(name="ID") //不要加，因为没用序列 @GeneratedValue(strategy=GenerationType.AUTO)
 public Integer getId() {
 	return id;
 }
@@ -52,6 +52,12 @@ public Integer getHeight() {
 public void setHeight(Integer height) {
 	this.height = height;
 }
+@Override
+public String toString() {
+	return "Person [id=" + id + ", name=" + name + ", gender=" + gender + ", age=" + age + ", height=" + height + "]";
+}
+
+
 
 
 	

@@ -3,6 +3,7 @@ package com.tao.rest;
 
 
 import javax.ejb.EJB;
+import javax.transaction.Transactional;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -31,6 +32,15 @@ public class JvmTest {
         return "hello,world!";
     }
     
+    @GET
+    @Path("/getPersonByIdJson")
+    @Produces(MediaType.APPLICATION_JSON)
+    public String getPersonByIdJson() {
+        return "{\"age\":70,\"gender\":\"M\",\"height\":188,\"id\":1000,\"name\":\"JSON\"}";
+    }
+    
+
+    
     
     @GET
     @Path("/getPersonById/{personid}")
@@ -45,10 +55,11 @@ public class JvmTest {
     @Path("/updatePerson")
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
+  
     public String updatePerson(Person person) {
-    	
+     	// System.out.print(person.toString());
     	 personServiceBean.update(person);
-    	 
+  
     	 return "update success";
     }
     
